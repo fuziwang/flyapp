@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="main.js"></script>
+    <style>
+        .header{
+            width:100%;
+            height:120px;
+            background-color:#3b89ba;
+            z-index:0;
+        }
+        .body{
+            margin:0 auto;
+            height:350px;
+            width:240px;
+            position: relative;;
+            bottom:60px;
+            z-index:100;
+        }
+        .touxiang{
+            margin:0 auto;
+            border:1px solid #000;
+            height:140px;
+            width:140px;
+            border-radius:20px;
+            background-color:#fff;
+        }
+        .tou{
+            margin:0 auto;
+            margin-top:23px;
+            border:0.5px solid #000;
+            height:100px;
+            width:100px;
+            border-radius:20px;
+            background-color:#fff;
+        }
+        .img{
+            width:100px;
+            height:100px;
+            border-radius:20px;
+        }
+        .wenzi{
+            margin-top:10px;
+            height:80px;
+            width:100%;
+            text-align:center;
+            font-size: 12px;
+        }
+        .name{
+            font-size: 18px;
+            font-weight: bold;
+            margin:8px 0 8px 0;
+            font-family:'Microsoft YaHei';
+        }
+        .banben{
+            margin:5px 0 0 0;
+        }
+        .xiazai{
+            margin:0 auto;
+            width:120px;
+            height:30px;
+            border:none;
+            margin-top:10px;
+        }
+        .button{
+            width:120px;
+            height:35px;
+            border:none;
+            text-align:center;
+            color:#fff;
+            background: url(./img/xiazai.png) 0 0 no-repeat #3b89ba;
+            background-size:35px 30px;
+            background-position:10% 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="header"></div>
+        <div class="body">
+            <div class="touxiang">
+                <div class="tou">
+                    <img src="./img/tou.jpg" alt="" class="img">
+                </div>
+            </div>
+            <div class="wenzi">
+                <p class="name">yalu102</p>
+                <p class="banben">版本1.0&nbsp;(Build&nbsp;1)&nbsp;&nbsp;大小:7.59M&nbsp;&nbsp;更新</p>
+                <p class="banben">时间&nbsp;2019-7-11&nbsp;15:50:04</p>
+            </div>
+            <div class="xiazai">
+                <input class="button" type="button" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下载安装">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
