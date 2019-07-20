@@ -10,15 +10,14 @@ class login extends Component {
             if (!err) {
                 const params = {
                     account:values.username,
-                    pwd:values.pwd,
+                    pwd:values.password,
                     qq:values.qq?values.qq:''
                 }
                 localStorage.setItem('account',params.account);
-                axios.get('/api/v1/dev/login',{params:params}).then(res => {
-                    console.log(res);
-                    console.log(res.data);
+                axios.get('/api/v1/dev/login', {
+                        params: params
+                }).then(res => {
                     if(res.data.code == 1 && res.data.result == true){
-                        document.cookie = 'key=login';
                         this.props.callback(true);
                     }
                 });

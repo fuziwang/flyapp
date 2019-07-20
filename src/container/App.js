@@ -9,7 +9,7 @@ export default class App extends Component {
   constructor(){
     super();
     this.state = {
-      islogin:true
+      islogin:false
     }
   }
   callback = (islogin)=>{
@@ -20,7 +20,7 @@ export default class App extends Component {
   render(){
     var cookie = document.cookie.split('=');
     return (
-      this.state.islogin || cookie[0] == 'key'?
+      this.state.islogin || cookie[0] == 'login'?
       <Layout style={{height:'100%'}}>
         <Banner callback={this.callback}/>
         <Layout style={{height:'100%'}}>
