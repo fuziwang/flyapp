@@ -6,7 +6,7 @@ const { Sider } = Layout;
 export default class nav extends Component {
     render() {
         return (
-            <Sider width={200} style={{ background: '#fff',margin:20 }}>
+            <Sider width={200} style={{ background: '#fff',margin:15, }}>
                 <Menu 
                     mode="inline"
                     defaultSelectedKeys={['1']}

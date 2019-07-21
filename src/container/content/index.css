@@ -1,3 +1,15 @@
 .ant-upload .ant-upload-select .ant-upload-select-text {
     display: inline;
 }
+
+.ant-table-thead>tr>th {
+    padding: 12px 12px;
+}
+
+.ant-table-tbody{
+    table-layout: fixed;
+}
+
+.ant-table-tbody>tr>td {
+    padding: 5px 5px;
+}
