@@ -15,21 +15,12 @@ const props = {
   headers: {
     authorization: 'authorization-text',
   },
-  showUploadList:false,
-  onChange(info) {
-    if (info.file.status !== 'uploading') {
-      console.log(info.file, info.fileList);
-    }
-    if (info.file.status === 'done') {
-      message.success(`文件上传成功`);
-    } else if (info.file.status === 'error') {
-      message.error(`文件上传失败`);
-    }
-  },
+  showUploadList:true
 };
 export default class content extends Component {
     constructor(){
       super();
+      console.log(document.body.scrollHeight)
       this.state = {
         current:1,
         data:[],
@@ -40,8 +31,10 @@ export default class content extends Component {
             title: '',
             dataIndex: 'icon',
             key: 'icon',
-            width:60,
-            render: text=>({text})
+            width:80,
+            render: text=>{
+              return <img src={"https://www1.iosflygo.com:9091/api/" + text}></img>
+            }
           },
           {
             title: 'App名称',
@@ -69,15 +62,15 @@ export default class content extends Component {
             title: '安装总数',
             dataIndex: 'amount',
             key: 'amount',
-            width: 120
+            width: 100
           },
           {
             title: '下载链接',
             dataIndex: 'url',
             key: 'url',
             render:(text,record) =>{
-              var result = text.replace(/(.{40})/g, '$1\n');
-              return <span>{result}</span>
+              // var result = text.replace(/(.{40})/g, '$1\n');
+              return <span style={{wordBreak:'break-all'}}>{text}</span>
             }
           },
           {
@@ -130,6 +123,33 @@ export default class content extends Component {
         },
       });
     }
+
+    handleChange = (info)=>{
+      if (info.file.status !== 'uploading') {
+        console.log(info.file, info.fileList);
+      }
+      if (info.file.status === 'done') {
+        message.success(`文件上传成功`);
+        const params = {
+          account: localStorage.getItem('account'),
+          page_num: this.state.current
+        }
+        axios.get('/api/v1/dev/app/list', {
+          params: params
+        }).then(res => {
+          var list = [...res.data];
+          for (var i = 0; i < res.data.length; i++) {
+            list[i]['key'] = i + 1;
+          }
+          this.setState({
+            data: res.data,
+            length: res.data.length == 0 ? 0 : res.data[0].page_cnt
+          });
+        });
+      } else if (info.file.status === 'error') {
+        message.error(`文件上传失败`);
+      }
+    }
     componentDidMount = ()=>{
       const params = {
         account:localStorage.getItem('account'),
@@ -144,7 +164,7 @@ export default class content extends Component {
         }
         this.setState({
           data:res.data,
-          length: res.data[0].page_cnt
+          length: res.data.length == 0?0:res.data[0].page_cnt
         });
       });
     }
@@ -162,14 +182,14 @@ export default class content extends Component {
                         <Breadcrumb.Item>App管理</Breadcrumb.Item>
                         <Breadcrumb.Item style={{color:'#333'}}>App列表</Breadcrumb.Item>
                     </Breadcrumb>
-                    <Upload style={{float:'right',marginTop:'10px'}} {...props}>
+                    <Upload style={{display:'block',marginTop:'10px'}} {...props} onChange={this.handleChange}>
                       <Button type = "primary"> 上传 </Button>
                     </Upload>
                     <Table
                       columns={this.columns}
                       dataSource={this.state.data}
-                      style={{clear:'both',paddingTop:'15px',fontSize:0}}
-                      scroll={{ y: 300 }}
+                      style={{clear:'both',paddingTop:'15px'}}
+                      scroll={{ y: document.body.scrollHeight - 330 }}
                       pagination={{
                         pageSize:20,
                         total: this.state.length,

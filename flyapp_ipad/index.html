@@ -5,77 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="main.js"></script>
     <style>
-        .header{
-            width:100%;
-            height:120px;
-            background-color:#3b89ba;
-            z-index:0;
-        }
-        .body{
-            margin:0 auto;
-            height:350px;
-            width:240px;
-            position: relative;;
-            bottom:60px;
-            z-index:100;
-        }
-        .touxiang{
-            margin:0 auto;
-            border:1px solid #000;
-            height:140px;
-            width:140px;
-            border-radius:20px;
-            background-color:#fff;
-        }
-        .tou{
-            margin:0 auto;
-            margin-top:23px;
-            border:0.5px solid #000;
-            height:100px;
-            width:100px;
-            border-radius:20px;
-            background-color:#fff;
-        }
-        .img{
-            width:100px;
-            height:100px;
-            border-radius:20px;
-        }
-        .wenzi{
-            margin-top:10px;
-            height:80px;
-            width:100%;
-            text-align:center;
-            font-size: 12px;
-        }
-        .name{
-            font-size: 18px;
-            font-weight: bold;
-            margin:8px 0 8px 0;
-            font-family:'Microsoft YaHei';
-        }
-        .banben{
-            margin:5px 0 0 0;
-        }
-        .xiazai{
-            margin:0 auto;
-            width:120px;
-            height:30px;
-            border:none;
-            margin-top:10px;
-        }
-        .button{
-            width:120px;
-            height:35px;
-            border:none;
-            text-align:center;
-            color:#fff;
-            background: url(./img/xiazai.png) 0 0 no-repeat #3b89ba;
-            background-size:35px 30px;
-            background-position:10% 50%;
-        }
+        .header{width:100%;height:120px;background-color:#3b89ba;z-index:0;}
+        .body{margin:0 auto;height:350px;width:240px;position: relative;;bottom:60px;z-index:100;}
+        .touxiang{margin:0 auto;border:1px solid #000;height:140px;width:140px;border-radius:20px;background-color:#fff;}
+        .tou{margin:0 auto;margin-top:23px;border:0.5px solid #000;height:100px;width:100px;border-radius:20px;background-color:#fff;}
+        .img{width:100px;height:100px;border-radius:20px;}
+        .wenzi{margin-top:10px;height:80px;width:100%;text-align:center;font-size: 12px;}
+        .name{font-size: 18px;font-weight: bold;margin:8px 0 8px 0;font-family:'Microsoft YaHei';}
+        .banben{margin:5px 0 0 0;}
+        .xiazai{margin:0 auto;width:120px;height:30px;border:none;margin-top:10px;}
+        .button{width:120px;height:35px;border:none;text-align:center;color:#fff;background: url(./img/xiazai.png) 0 0 no-repeat #3b89ba;background-size:35px 30px;background-position:10% 50%;outline:0;}
+        .wait{width:120px;height:35px;border:none;text-align:center;color:#fff;outline:0;}
     </style>
 </head>
 <body>
@@ -84,18 +25,104 @@
         <div class="body">
             <div class="touxiang">
                 <div class="tou">
-                    <img src="./img/tou.jpg" alt="" class="img">
+                    <img src="" alt="" class="img">
                 </div>
             </div>
             <div class="wenzi">
                 <p class="name">yalu102</p>
-                <p class="banben">版本1.0&nbsp;(Build&nbsp;1)&nbsp;&nbsp;大小:7.59M&nbsp;&nbsp;更新</p>
-                <p class="banben">时间&nbsp;2019-7-11&nbsp;15:50:04</p>
+                <p class="banben">版本<span class="version">1.0</span>&nbsp;(Build&nbsp;1)&nbsp;&nbsp;大小:<span class="size">7.59M</span>&nbsp;&nbsp;更新</p>
+                <p class="banben">时间&nbsp;<span class="updatetime">2019-7-11&nbsp;15:50:04</span></p>
             </div>
             <div class="xiazai">
-                <input class="button" type="button" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下载安装">
+                <input class="wait" type="button" value="      请等待。。" disabled/>
             </div>
         </div>
     </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+	function geturl(name){
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"),
+			r = window.location.search.substr(1).match(reg),
+			context = ""; 
+
+		if (r != null) 
+			context = r[2];
+
+		reg = null;
+		r = null;
+
+		return context == null || context == "" || context == "undefined" ? "" : context; 
+	}
+
+	var ud = geturl('ud'), // 获取ud的值
+		ap = geturl('ap'); // 获取ap的值
+
+	function getlist(ud,ap){
+		$.ajax({
+			type:'get',
+			url:'https://www1.iosflygo.com:9091/api/v1/web/sig/list',
+			data:{
+				ud:ud,
+				ap:ap
+			},
+			dataType:"json",
+	        async:false,
+	        success:function(res){
+	        	$('.tou img').attr('src','https://www1.iosflygo.com:9091/api/' + res.icon);
+	            $('.name').text(res.app_name);
+	            $('.version').text(res.version);
+	            $('.size').text(res.size);
+	            $('.updatetime').text(res.update_time);
+	        }
+		});
+	}
+
+	getlist('a4062337962f4fd0f2a0cdaad756f55a6bf50313','23');// 修改 只需要改为geturl(ud,ap);
+
+	function isexist(ud,ap){
+		var timer = setInterval(function(){
+			$.ajax({
+				type:'get',
+				url:'https://www1.iosflygo.com:9091/api/v1/web/download/exist',
+				data:{
+					ud:ud,
+					ap:ap
+				},
+				dataType:'json',
+				async:false,
+				success:function(res){
+					if(res.result == true){
+						clearInterval(timer);
+						$('.wait').attr('class','button');
+						$('.button').val('      下载安装');
+						$('.button').removeAttr('disabled');
+					}
+				}
+			})
+		},2000);
+	}
+	isexist('a4062337962f4fd0f2a0cdaad756f55a6bf50313','23');// 修改 只需要改为geturl(ud,ap);
+	var btn = $('input[type="button"]');
+	btn.click(function(){
+		console.log(1);
+		$.ajax({
+            type:"post",
+            url:"https://www1.iosflygo.com:9091/api/v1/user/download/sig",
+            data:{
+            	ud:'a4062337962f4fd0f2a0cdaad756f55a6bf50313',
+            	ap:'23'
+            }, // 改的时候只需要改为 ud:ud,ap:ap
+            dataType:"json",
+            async:false,
+            success:function(res){
+                if(res.code == 1 && res.result == true){
+                    console.log('ok');
+                }else{
+                    console.log('error');
+                }
+            }
+        });
+	});
+</script>
 </html>

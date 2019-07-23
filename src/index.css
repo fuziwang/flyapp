@@ -19,5 +19,9 @@ code {
 }
 
 .ant-upload.ant-upload-select{
-  display: inline;
+  float:right;
+}
+
+.ant-upload-list.ant-upload-list-text{
+  clear:both;
 }
