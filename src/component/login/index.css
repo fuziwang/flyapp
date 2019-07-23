@@ -25,3 +25,40 @@
 .login-form-button{
   width:300px;
 }
+
+.vcode{
+  width:75%;
+}
+
+.vcodewrap {
+    width: 60px;
+    display: inline-block;
+    height: 30px;
+    position: relative;
+    background: #666;
+    top:11px;
+    left:14px;
+}
+
+.mask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    line-height: 25px;
+    color: white;
+    z-index: 1;
+}
+
+.itemStr {
+    float: left;
+    margin-left: 6px;
+}
+
+#bgi {
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
