@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import Banner from './banner';
 import Nav from './nav';
-import Content from './content';
+import Home from './content/home';
+import DownLoad from './content/download';
+import Text from './content/text';
 import { Layout} from 'antd';
 import Login from '../component/login';
+import { Route,Switch} from 'react-router-dom';
 
 export default class App extends Component {
   constructor(){
@@ -25,7 +28,11 @@ export default class App extends Component {
         <Banner callback={this.callback}/>
         <Layout style={{height:'100%'}}>
           <Nav/>
-          <Content/>
+          <Switch>
+              <Route exact path="/" component={Home}/>
+              <Route exact path="/download" component={DownLoad}/>
+              <Route exact path="/text" component={Text}/>
+          </Switch>
         </Layout>
       </Layout>:<Login callback={this.callback}/>
     );

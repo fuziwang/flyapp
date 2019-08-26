@@ -41,6 +41,7 @@ class VCode extends Component {
         ctx.strokeStyle = `rgb(${this.getRandom(100,10,3).toString()})`
     }
     componentDidMount() {
+        vode = '';
         this.state.data.map(v=>{
             vode += String.fromCharCode(v > 57 && v < 84 ? v + 7 : (v < 57 ? v : v + 13));
         })
@@ -48,6 +49,10 @@ class VCode extends Component {
     }
 
     render() {
+        vode = '';
+        this.state.data.map(v => {
+            vode += String.fromCharCode(v > 57 && v < 84 ? v + 7 : (v < 57 ? v : v + 13));
+        })
         const { rotate, color } = this.state
         return (
         <div className='vcodewrap' >
@@ -60,7 +65,6 @@ class VCode extends Component {
                 transform:`rotate(${rotate[i]}deg)`,
                 fontSize: `14px`,
                 color: `rgb(${color[i].toString()})`,
-                //   color:'#333',
                 lineHeight:'30px'
                 }}
                 onMouseEnter={() => this.setState({refresh:true})}
@@ -86,12 +90,6 @@ class VCode extends Component {
 }
 
 class login extends Component {
-    constructor(){
-        super();
-        this.state = {
-            letcode:vode
-        }
-    }
     handleSubmit = e => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
@@ -113,12 +111,6 @@ class login extends Component {
             }
         });
     };
-
-    componentDidMount = ()=>{
-        this.setState({
-            letcode:vode
-        })
-    }
 
     render() {
         const { getFieldDecorator } = this.props.form;
@@ -151,7 +143,7 @@ class login extends Component {
                     </Form.Item>
                     <Form.Item>         
                     {getFieldDecorator('vcode', {
-                            rules: [{ required: true, message: '请输入验证码' },{pattern: new RegExp('^' + this.state.letcode + '$', 'gim'), message: '请输入正确的验证码'}],
+                            rules: [{ required: true, message: '请输入验证码' },{pattern: new RegExp('^' + vode + '$', 'gim'), message: '请输入正确的验证码'}],
                         })(
                             <span>
                                 <Input placeholder="请输入验证码" className="vcode" type="vcode"/>

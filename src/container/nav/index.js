@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Layout, Menu, Icon } from 'antd';
+import { Layout, Menu} from 'antd';
+import { Link} from 'react-router-dom';
 
 const { SubMenu } = Menu;
 const { Sider } = Layout;
@@ -9,7 +10,7 @@ export default class nav extends Component {
             <Sider width={200} style={{ background: '#fff',margin:15, }}>
                 <Menu 
                     mode="inline"
-                    defaultSelectedKeys={['1']}
+                    defaultSelectedKeys={[window.location.pathname]}
                     defaultOpenKeys={['sub1']}
                     style={{ height: '100%', borderRight: 0 }}>
                     <SubMenu
@@ -21,7 +22,9 @@ export default class nav extends Component {
                         </span>
                         }
                     >
-                        <Menu.Item key="1">APP</Menu.Item>
+                        <Menu.Item key="/"><Link to="/">APP</Link></Menu.Item>
+                        <Menu.Item key="/download"><Link to="/download">下载管理</Link></Menu.Item>
+                        <Menu.Item key="/text"><Link to="/text">文本输入</Link></Menu.Item>
                     </SubMenu>
                 </Menu>
             </Sider>

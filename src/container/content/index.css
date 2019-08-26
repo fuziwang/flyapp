@@ -21,3 +21,16 @@ img{
 .span-break{
     word-wrap:break-word
 }
+
+.used{
+    display: block;
+    height: 50px;
+    line-height: 50px;
+    margin-left: 25px;
+}
+
+.info{
+    display: inline-block;
+    margin-top:15px;
+    font-weight: 500
+}
