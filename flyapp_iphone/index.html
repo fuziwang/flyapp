@@ -68,7 +68,7 @@
         <div style="display: inline-block;width: 31vw;vertical-align: top;">
             <div id="appdetails-icon" class="appdetails-icon small-5" style="width: 100%;">
                 <div class="ios-app-icon">
-                    <img class="ios-app-icon-img" src="http://file.cjtuzi.com/app/38033/com.xuqg.autoyalu/ios/icon.png" style="background-color: #fefefe;" alt="">
+                    <img class="ios-app-icon-img" style="background-color: #fefefe;" alt="">
                 </div>
             </div>
         </div>
@@ -79,7 +79,7 @@
                         <h1 class="ios-app-title" style="font-size: 20px;height: 1.2223em;width: 50vw;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-family:PingFangSC-Medium;margin-bottom: 8px;">
                             妖妖妖 <span class="ios-app-title-cls" style="display: none;">4+</span>
                         </h1>
-                        <h2 class="ios-app-vendor"><a href="javascript:;" style="color:rgba(132,132,137,1);">cjtuzi.app</a></h2>
+                        <h2 class="ios-app-vendor"><a href="javascript:;" style="color:rgba(132,132,137,1);">快应用</a></h2>
                     </header>
                 </div>
             </div>
@@ -90,7 +90,7 @@
                         <div id="installText" style="display:none;margin-top:-20px;">
                         </div>
                         <li id="install-btn-container" class="install-btn-container0" style="display: inline-block;">
-                            <div id="ios-installing" style="overflow: hidden; background: rgb(204, 204, 204); border-color: unset; box-shadow: unset;" onclick="onDownloadClick()">
+                            <div id="ios-installing" style="overflow: hidden; background: rgb(204, 204, 204); border-color: unset; box-shadow: unset;">
                                 <div class="download-loading-text animate" id="iosdownbtn" >
                                 </div>
                                 <span id="xzzz">安装</span>
@@ -132,7 +132,7 @@
         <div class="ellipsis">
             <div class="ellipsis-container">
                 <div class="ellipsis-content f-game-content" style="color: #2e2e2e;font-size: 14.3px;">
-                    <p>【妖妖妖】 cjtuzi推荐APP</p>
+                    <p>【<span class="ios-name">妖妖妖</span>】 快应用推荐APP</p>
                 </div>
                 <div id="expand" class="ellipsis-ghost expand">
                     <div class="ellipsis-more" style="background-image: linear-gradient(to right , #ffffff00, #ffffffff 40%);">更多
@@ -219,13 +219,13 @@
     <section class="l-content-width section section-bordered">
         <h2 class="section-headline">新功能</h2>
         <div class="ios-app-whatsnew-content ios-app-whatsnew-latest">
-            <p class="banb">版本 1.1.0<span>5天前</span></p>
+            <p class="banb"><b class="version" style="font-weight: normal">版本 1.1.0</b><span>5天前</span></p>
         </div>
         <div class="ios-app-whatsnew-content">
             <div class="ellipsis">
                 <div class="ellipsis-container">
                     <div class="ellipsis-content f-game-content2" style="height: 43px;">
-                        <p>修复部分bug</p>
+                        <p>增加新的特性</p>
                     </div>
                     <div id="expand2" class="ellipsis-ghost expand">
                         <div class="ellipsis-more" style="background-image: linear-gradient(to right , #ffffff00, #ffffffff 40%);">更多</div>
@@ -238,11 +238,11 @@
         <dl class="ios-app-infor-list">
             <div class="ios-app-infor-list-row row-bottom-border">
                 <dt class="ios-app-infor-list-row-term">开发商</dt>
-                <dd class="ios-app-infor-list-row-val">cjtuzi.app</dd>
+                <dd class="ios-app-infor-list-row-val">快应用</dd>
             </div>
             <div class="ios-app-infor-list-row row-bottom-border">
                 <dt class="ios-app-infor-list-row-term">大小</dt>
-                <dd class="ios-app-infor-list-row-val">7.69MB</dd>
+                <dd class="ios-app-infor-list-row-val ios-app-size">7.69MB</dd>
             </div>
             <div class="ios-app-infor-list-row row-bottom-border">
                 <dt class="ios-app-infor-list-row-term">类别</dt>
@@ -266,7 +266,7 @@
             </div>
             <div class="ios-app-infor-list-row row-bottom-border">
                 <dt class="ios-app-infor-list-row-term">Copyright</dt>
-                <dd class="ios-app-infor-list-row-val">妖妖妖</dd>
+                <dd class="ios-app-infor-list-row-val ios-name">妖妖妖</dd>
             </div>
             <div class="ios-app-infor-list-row row-bottom-border">
                 <dt class="ios-app-infor-list-row-term">价格</dt>
@@ -334,7 +334,31 @@
 </script>
 
 <script>
+    function getlist(ud,ap){
+		$.ajax({
+			type:'get',
+			url:'https://www1.iosflygo.com:9091/api/v1/web/sig/list',
+			data:{
+				ud:ud,
+				ap:ap
+			},
+			dataType:"json",
+	        async:false,
+	        success:function(res){
+	        	$('.ios-app-icon-img').attr('src','https://www1.iosflygo.com:9091/api/' + res.icon);
+                $('.ios-app-title').text(res.app_name);
+                $('.ios-name').text(res.app_name);
+	            $('.banb .version').text(res.version);
+	            $('.ios-app-size').text(res.size);
+	        }
+		});
+    }
     
+    
+
+    getlist('a4062337962f4fd0f2a0cdaad756f55a6bf50313','23');// 修改 只需要改为geturl(ud,ap);
+    
+
 </script>
 
 

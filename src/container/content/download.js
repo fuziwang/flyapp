@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Layout,Table} from 'antd';
+import { Layout,Table,Breadcrumb} from 'antd';
 import axios from 'axios';
 import './index.css';
 
@@ -14,7 +14,7 @@ export default class DownLoad extends Component {
         length:0,
         basicdata: [{
           useful_amount: 0,
-          registered_amount: 171
+          registered_amount: 0
         }]
       }
       this.cols = [{
@@ -28,30 +28,38 @@ export default class DownLoad extends Component {
             title: '添加时间',
             dataIndex: 'download_date',
             key: 'download_date',
-            width:200
+            width:150
           },
           {
-            title: '名称',
+            title: 'app名称',
             dataIndex: 'app_name',
             key: 'app_name',
-            width: 150
+            width: 120
           },
           {
-            title: '唯一号',
+            title: 'UDID',
             dataIndex: 'UDID',
             key: 'UDID',
-            width: 180
+            width: 150,
+            render:(text,record) =>{
+              // var result = text.replace(/(.{40})/g, '$1\n');
+              return <span style={{wordBreak:'break-all'}}>{text}</span>
+            }
           },
           {
             title: '链接',
             dataIndex: 'url',
-            key: 'url'
+            key: 'url',
+            render:(text,record) =>{
+              // var result = text.replace(/(.{40})/g, '$1\n');
+              return <span style={{wordBreak:'break-all'}}>{text}</span>
+            }
           },
           {
-            title: '名称',
+            title: 'bundleID',
             dataIndex: 'bundleID',
             key: 'bundleID',
-            width: 180
+            width: 200
           }
         ];
     }
@@ -81,6 +89,10 @@ export default class DownLoad extends Component {
                     margin: 15,
                     marginRight:20
                 }}>
+                    <Breadcrumb>
+                        <Breadcrumb.Item>App管理</Breadcrumb.Item>
+                        <Breadcrumb.Item style={{color:'#333'}}>下载管理</Breadcrumb.Item>
+                    </Breadcrumb>
                     <Table 
                       columns = {this.cols}
                       dataSource = {this.state.basicdata}// 这里需要改动
@@ -93,7 +105,7 @@ export default class DownLoad extends Component {
                       bordered
                       dataSource={this.state.data}
                       style={{clear:'both',paddingTop:'15px'}}
-                      scroll={{ y: document.body.scrollHeight - 535 }}// 需要改动
+                      scroll={{ y: document.body.scrollHeight - 455 }}// 需要改动
                       pagination={{
                         pageSize:20,
                         total: this.state.length

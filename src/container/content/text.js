@@ -50,7 +50,7 @@ export default class Text extends Component {
                             that.setState({
                                 isOk: false
                             });
-                        }, 10000)
+                        }, 100000)
                     }
                 });
             },
@@ -71,9 +71,9 @@ export default class Text extends Component {
                 }}>
                     <Breadcrumb>
                         <Breadcrumb.Item>App管理</Breadcrumb.Item>
-                        <Breadcrumb.Item style={{color:'#333'}}>文本输入</Breadcrumb.Item>
+                        <Breadcrumb.Item style={{color:'#333'}}>充值</Breadcrumb.Item>
                     </Breadcrumb>
-                    <label htmlFor="text" className="info">这里是提示语内容</label>
+                    <label htmlFor="text" className="info">输入12位充值码，最多支持10行，每行一个</label>
                     < TextArea 
                         rows={8} 
                         style={{marginTop:'15px'}} 

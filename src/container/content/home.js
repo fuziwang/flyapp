@@ -6,17 +6,6 @@ import './index.css';
 const { Content} = Layout;
 const { confirm } = Modal;
 
-const props = {
-  name: 'app_file',
-  action: '/api/v1/dev/upload/ipa',
-  data:{
-    account:localStorage.getItem('account')
-  },
-  headers: {
-    authorization: 'authorization-text',
-  },
-  showUploadList:true
-};
 export default class Home extends Component {
     constructor(){
       super();
@@ -25,6 +14,17 @@ export default class Home extends Component {
         data:[],
         length:0
       }
+      this.prop = {
+        name: 'app_file',
+        action: '/api/v1/dev/upload/ipa',
+        data: {
+          account: localStorage.getItem('account')
+        },
+        headers: {
+          authorization: 'authorization-text',
+        },
+        showUploadList: true
+      };
       this.columns = [
           {
             title: '',
@@ -124,7 +124,7 @@ export default class Home extends Component {
     }
 
     handleChange = (info)=>{
-      console.log(info);
+      // console.log(info);
       if (info.file.status !== 'uploading') {
         console.log(info.file, info.fileList);
       }
@@ -182,7 +182,7 @@ export default class Home extends Component {
                         <Breadcrumb.Item>App管理</Breadcrumb.Item>
                         <Breadcrumb.Item style={{color:'#333'}}>App列表</Breadcrumb.Item>
                     </Breadcrumb>
-                    <Upload style={{display:'block',marginTop:'10px'}} {...props} onChange={this.handleChange}>
+                    <Upload style={{display:'block',marginTop:'10px'}} {...this.prop} onChange={this.handleChange}>
                       <Button type = "primary"> 上传 </Button>
                     </Upload>
                     <Table
